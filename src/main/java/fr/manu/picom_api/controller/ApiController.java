@@ -33,14 +33,14 @@ public class ApiController {
         if (userService.getUsers().isEmpty()) {
 
             User user = new User("admin", "admin", "admin@gmail.com", "admin", "admin");
-            User user1 = new User("user", "user", "user@gmail.com", "user", "user");
+            User user1 = new User("Emmanuel", "Correia", "emmanuelvds@gmail.com", "123456", "06.65.73.99.52");
 
             userService.addUser(user);
             userService.addUser(user1);
 
             roleService.addRoleToUser("admin@gmail.com", "ROLE_ADMIN");
             roleService.addRoleToUser("admin@gmail.com", "ROLE_USER");
-            roleService.addRoleToUser("user@gmail.com", "ROLE_USER");
+            roleService.addRoleToUser("emmanuelvds@gmail.com", "ROLE_USER");
         }
     }
 
@@ -50,7 +50,7 @@ public class ApiController {
     }
 
     @GetMapping("/app/users/{email}")
-    public ResponseEntity<User> getUserById(@PathVariable("email") String email) {
+    public ResponseEntity<User> getUserByEmail(@PathVariable("email") String email) {
         return ResponseEntity.ok().body(userService.findByUserEmail(email));
     }
 

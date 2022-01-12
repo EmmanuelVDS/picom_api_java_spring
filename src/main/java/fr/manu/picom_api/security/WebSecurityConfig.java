@@ -15,8 +15,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
@@ -41,12 +39,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors();
         http.formLogin().loginProcessingUrl("/api/auth/login"); // Change the url to access the login page
         http.sessionManagement().sessionCreationPolicy(STATELESS);
-        http.authorizeRequests().antMatchers("/**").permitAll();
+        http.authorizeRequests().antMatchers("/api/auth/**").permitAll()
+                        .antMatchers("/api/admin/**").hasRole("ADMIN")
+                        .antMatchers("/api/**").authenticated();
         http.addFilter(authenticationFilter);
         http.addFilterBefore(new AuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 
     }
-
 
 
     @Bean

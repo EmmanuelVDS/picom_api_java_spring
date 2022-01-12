@@ -1,5 +1,6 @@
 package fr.manu.picom_api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -24,8 +25,10 @@ public class User {
 
     private String lastname;
 
+    @Column(unique = true)
     private String email;
 
+    @JsonIgnore
     private String password;
 
     private String phone;

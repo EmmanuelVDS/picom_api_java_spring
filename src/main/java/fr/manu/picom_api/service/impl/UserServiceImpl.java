@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             log.error("user not found in the db");
             throw new UsernameNotFoundException("user not found in the db");
         } else {
-            log.info("User found in the db");
+            log.info("User found in the db : " + user);
         }
 
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
