@@ -4,16 +4,15 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
-@AllArgsConstructor
-public class Zone {
+public class Zone extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,13 +22,25 @@ public class Zone {
 
     private int stopNumber;
 
-    @OneToMany(mappedBy = "zone")
+    @ManyToMany(mappedBy = "zones")
     @ToString.Exclude
-    private List<Stop> stops;
+    private Collection<Advertisement> advertisements = new ArrayList<>();
 
     @OneToMany(mappedBy = "zone")
     @ToString.Exclude
-    private List<ZoneHasHour> zoneHasHours;
+    private Collection<Stop> stops = new ArrayList<>();
+
+    @OneToMany(mappedBy = "zone")
+    @ToString.Exclude
+    private Collection<ZoneHasHour> zoneHasHours = new ArrayList<>();
+
+    public Zone() {
+    }
+
+    public Zone(String name, int stopNumber) {
+        this.name = name;
+        this.stopNumber = stopNumber;
+    }
 
     @Override
     public boolean equals(Object o) {

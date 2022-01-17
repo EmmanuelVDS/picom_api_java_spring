@@ -12,9 +12,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
-@AllArgsConstructor
-public class Hour {
+public class Hour extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +25,14 @@ public class Hour {
     @OneToMany(mappedBy = "hour")
     @ToString.Exclude
     private List<ZoneHasHour> zoneHasHours;
+
+    public Hour() {
+    }
+
+    public Hour(LocalTime hourStart, LocalTime hourEnd) {
+        this.hourStart = hourStart;
+        this.hourEnd = hourEnd;
+    }
 
     @Override
     public boolean equals(Object o) {

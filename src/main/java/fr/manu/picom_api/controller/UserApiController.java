@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-public class ApiController {
+public class UserApiController {
 
     private final UserService userService;
     private final RoleService roleService;
@@ -44,12 +44,12 @@ public class ApiController {
         }
     }
 
-    @GetMapping("/app/users")
+    @GetMapping("/app/user")
     public ResponseEntity<List<User>> getUsers() {
         return ResponseEntity.ok().body(userService.getUsers());
     }
 
-    @GetMapping("/app/users/{email}")
+    @GetMapping("/app/user/{email}")
     public ResponseEntity<User> getUserByEmail(@PathVariable("email") String email) {
         return ResponseEntity.ok().body(userService.findByUserEmail(email));
     }

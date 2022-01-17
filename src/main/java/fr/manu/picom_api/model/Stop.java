@@ -10,9 +10,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
-@AllArgsConstructor
-public class Stop {
+public class Stop extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +22,14 @@ public class Stop {
 
     @ManyToOne
     private Zone zone;
+
+    public Stop() {
+    }
+
+    public Stop(String name, Zone zone) {
+        this.name = name;
+        this.zone = zone;
+    }
 
     @Override
     public boolean equals(Object o) {
